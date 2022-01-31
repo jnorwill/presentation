@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <img src="./images/mocha.png" alt="mocha" />
+          <p>
+            Mocha is a Javascript testing framework used for testing apps
+            automatically.
+          </p>
+        </section>
+        <section>
+          <h2>INSTALLATION</h2>
+          <p class="little-text">Install with npm globally</p>
+          <pre><code class="language-html" data-trim>
+						$ npm install --global mocha
+					</code></pre>
+          <p class="little-text">or as a development dependency</p>
+          <pre><code class="language-html" data-trim>
+						$ npm install --save-dev mocha
+					</code></pre>
+          <p class="little-text">To check the installation, use the command</p>
+          <pre><code class="language-html" data-trim>
+						$ mocha --version
+					</code></pre>
+        </section>
+        <section>
+          <h2>GETTING STARTED</h2>
+          <pre><code class="language-js" data-trim data-line-numbers>
+						var assert = require('assert');
+						describe('Array', function() {
+						  describe('#indexOf()', function() {
+								it('return -1 when the value is not present', function() {
+								assert.equal([1, 2, 3].indexOf(4), -1);
+								});
+							});
+						});
+					</code></pre>
+          <pre><code class="language-html" data-trim data-line-numbers>
+						Array
+            #indexOf()
+                ✓ should return -1 when the value is not present
+            1 passing (9ms)
+					</code></pre>
+          <p class="little-text">
+            <span class="span-text"
+              >describe('tittle', function() { ... })</span
+            >
+            The function takes two arguments: a String with tittle and a
+            callback.
+          </p>
+          <p class="little-text">
+            <span class="span-text">it('description', function() { ... })</span>
+            Also takes two arguments. A string that contains a description of
+            what the test should do and a callback function that contains the
+            test itself.
+          </p>
+        </section>
+        <section>
+          <h2>Assert libraries</h2>
+          <ul>
+            <li>should.js</li>
+            <li>expect.js</li>
+            <li>chai</li>
+            <li>better-assert</li>
+          </ul>
+          <pre><code class="language-js" data-trim data-line-numbers>
+            var assert = require('assert');
+          </code></pre>
+        </section>
+        <section>
+          <h2>ARROW FUNCTIONS</h2>
+          <pre><code class="language-js" data-trim data-line-numbers>
+						describe('my suite', () => {
+              it('my test', () => {
+                // should set the timeout of this test to 1000 ms; instead will fail
+                this.timeout(1000);
+                assert.ok(true);
+              });
+            });
+					</code></pre>
+        </section>
+        <section>
+          <h2>HOOKS</h2>
+          <pre><code class="language-js" data-trim data-line-numbers>
+            describe("тест", function() {
+              before(function() {
+                // before hook
+              });
+                after(function() {
+                // after hook
+              });
+              beforeEach(function namedFun() {
+                // beforeEach:namedFun
+              });
+              afterEach('some description', function() {
+                // afterEach:some description
+              });
+                it('тест 1', function() {alert(1)});
+                it('тест 2', function() {alert(2)});
+              });              
+					</code></pre>
+        </section>
+        <section>
+          <h2>PENDING TESTS, EXCLUSIVE TESTS, INCLUSIVE TESTS</h2>
+          <pre><code class="language-js" data-trim data-line-numbers>
+            describe('Array', function() {
+              describe.only('#indexOf()', function() {
+                it.only('should return -1 unless present', function() {
+                  // this test will be run
+                });
+                it.skip('should return -1 unless present', function() {
+                  // this test will not be run
+                });
+                it('should return the index when present', function() {
+                  // this test will not be run
+                });
+                it('should return -1 the index when present');
+                 // this test will not be run
+            });                       
+					</code></pre>
+        </section>
+        <section>
+          <h2>TEST DURATION</h2>
+          <pre><code class="language-html" data-trim>
+            Array
+            #indexOf()
+                ✓ should return -1 when the value is not present
+            1 passing (9ms)                     
+					</code></pre>
+          <pre><code class="language-js" data-trim data-line-numbers>
+            describe('something slow', function() {
+              this.slow(300000); // five minutes
+            
+              it('should take long enough for me to go make a sandwich', function() {
+                // ...
+              });
+            });                      
+					</code></pre>
+          <img
+            src="./images/duration.png"
+            alt="duration"
+            style="background-color: #ffffff"
+          />
+        </section>
+        <section>
+          <h2>INTERFACES</h2>
+          <ul>
+            <li>
+              <p>BDD</p>
+              <p class="little-text">
+                The BDD interface provides describe(), context(), it(),
+                specify(), before(), after(), beforeEach(), and afterEach(). All
+                of the previous examples were written using the BDD interface.
+              </p>
+            </li>
+            <li>
+              <p>ТDD</p>
+              <p class="little-text">
+                The TDD interface provides suite(), test(), suiteSetup(),
+                suiteTeardown(), setup(), and teardown():
+              </p>
+            </li>
+            <li>
+              <p>EXPORTS</p>
+              <p class="little-text">
+                The Exports interface is much like Mocha’s predecessor expresso.
+                The keys before, after, beforeEach, and afterEach are
+                special-cased, object values are suites, and function values are
+                test-cases:
+              </p>
+            </li>
+            <li>
+              <p>QUNIT</p>
+              <p class="little-text">
+                Like TDD, it uses suite() and test(), but resembling BDD, it
+                also contains before(), after(), beforeEach(), and afterEach().
+              </p>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
